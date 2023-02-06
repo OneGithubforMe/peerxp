@@ -5,24 +5,23 @@
 {% endblock head %}
 
 {% block content %}
-<div class="m-3">
-    <h2>All Departments</h2><br>
+<div class="w-50 ml-auto mr-auto">
+    <h4>All Departments</h4><br>
+<div class="">
     {% for department in page_obj %}
-        <h4>{{ department.name|upper }}</h4>
-        <p class="mb-2">{{ department.description }}</p>
-        <p>
-            <a href="/department/{{department.id}}">Detail</a>
-            <a href="/department/{{department.id}}/update">Edit</a>
-            <a href="/department/{{department.id}}/delete">Delete</a>
-        </p>
+        <h5><a href="/department/{{department.id}}">{{ department.name }}</a> </h5>
+        <p class="mb-1">{{ department.description }}</p>
         <hr>
+    {% empty %}
+        <p class="mb-1">No Department</p>
     {% endfor %}
+
 </div>
 <div class="pagination mx-1">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page=1" class="mx-1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="mx-1">previous</a>
         {% endif %}
 
         <span class="current">
@@ -30,11 +29,13 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}" class="mx-1">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="mx-1">last &raquo;</a>
         {% endif %}
     </span>
 </div>
+</div>
+<br>
 
 {% endblock content %}
 

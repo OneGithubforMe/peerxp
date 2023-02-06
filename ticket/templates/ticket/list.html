@@ -5,36 +5,40 @@
 {% endblock head %}
 
 {% block content %}
-<div class="m-3">
-    <h2>All Tickets</h2><br>
-    {% for ticket in page_obj %}
-        <h4>{{ ticket.subject|upper }}</h4>
-        <p class="mb-2">{{ ticket.description }}</p>
-        <p>
-            <a href="/ticket/{{ticket.id}}">Detail</a> <a href="/ticket/{{ticket.id}}/delete">Delete</a>
-        </p>
-        <hr>
-    {% endfor %}
-</div>
-<div class="pagination mx-1">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
+<div class="w-50 ml-auto mr-auto">
+    <div class="">
+        <h2>All Tickets</h2><br>
+        {% for ticket in page_obj %}
+            <div class="border p-3">
+                <span class="font-weight-bold">#{{ticket.zendesk_ticket_id}} </span> <a href="/ticket/{{ticket.id}}">{{ticket.subject}}</a>
+                <br>
+                {{ticket.priority}} Priority, {{ticket.created_at|timesince}} ago
+            </div>
+        {% empty %}
+            <p class="mb-1">No Ticket.</p>
+        {% endfor %}
+    </div>
+    {% if page_obj %}
+        <div class="pagination mx-1">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
 </div>
-<br>
-<a href="/ticket/create" class="mx-3">Create Ticket</a><br>
+
 {% endblock content %}
 
 {% block js %}

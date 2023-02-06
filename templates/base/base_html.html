@@ -17,17 +17,17 @@
 
 <body>
     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-            {% endfor %}
-        </ul>
+        <div class="text-center">
+        {% for message in messages %}
+            <span {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }}</span><br>
+        {% endfor %}
+        </div>
     {% endif %}
     {% csrf_token %}
 
     {% block pre_content %}
     {% endblock pre_content %}
-
+    <br>
     {% block content %}
     {% endblock content %}
 
@@ -38,12 +38,16 @@
     {% endblock js %}
 
     {% block footer %}
-    <div class="mx-4 mt-3">
+    <div class="mx-4 mt-1 text-center">
+        <a href="/">Home</a><br>
+        <a href="/ticket/create">Create Ticket</a><br>
+        <a href="/ticket/">Manage Tickets</a><br>
         {% is_admin request.user.role as admin_access%}
         {% if admin_access %}
+            <a href="/account/user/create">Add user</a><br>
+            <a href="/department/create">Create department</a><br>
             <a href="/department/">All departments</a><br>
         {% endif %}
-        <a href="/ticket/">All Tickets</a>
     </div>
     {% endblock footer %}
 </body>

@@ -1,14 +1,20 @@
 {% extends 'base/base_html.html' %}
 
 {% block content %}
-    <div class="container py-5">
+    <div class="w-50 ml-auto mr-auto">
+        <h4>Create/Update Department</h4>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <p><button class="btn btn-primary" type="submit">Save</button></p>
+            <p><button class="btn btn-primary" type="submit">Create Department</button></p>
         </form>
-
-        <a href="/department/">All departments</a>
     </div>
 {% endblock content %}
 
+{% block js %}
+    <script>
+        $("input").addClass('form-control')
+        $("#id_description").addClass('form-control')
+        $("#id_role").addClass('form-control')
+    </script>
+{% endblock js %}

@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-4*zdi@ff@=eyivc0w9ut#n)rvqtm#_8i(b-)@k6tg*rk9*$$#g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -80,9 +80,12 @@ WSGI_APPLICATION = "acme_support.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "peerxp_db",
+        'USER': "scoot_tech",
+        'PASSWORD': "HpRWQ3uy66vT",
+        "HOST": 'localhost',
     }
 }
 

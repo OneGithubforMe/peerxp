@@ -1,15 +1,22 @@
 {% extends 'base/base_html.html' %}
 
 {% block content %}
-    <div class="container py-5">
-        <h2>Create a Ticket</h2>
+    <div class="w-50 ml-auto mr-auto">
+        <h4>Create a Ticket</h4>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <p><button class="btn btn-primary" type="submit">Save</button></p>
+            <p><button class="btn btn-primary" type="submit">Create Ticket</button></p>
         </form>
-
-        <a href="/department/">All departments</a>
     </div>
 {% endblock content %}
+
+{% block js %}
+    <script>
+        $("input").addClass('form-control')
+        $("#id_description").addClass('form-control')
+        $("#id_department").addClass('form-control')
+        $("#id_priority").addClass('form-control')
+    </script>
+{% endblock js %}
 

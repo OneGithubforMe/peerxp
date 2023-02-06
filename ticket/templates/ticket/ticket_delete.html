@@ -1,16 +1,20 @@
 {% extends 'base/base_html.html' %}
 
 {% block head %}
-    <title>{{object.name}}</title>
+    <title>{{object.subject}} | Delete</title>
 {% endblock head %}
 
 {% block content %}
-    <div class="container py-5">
+    <div class="container text-center">
+        {% if object %}
         <form method="POST">
             {% csrf_token %}
             <h3>Do you want to delete the ticket "{{object.subject}}"?</h3>
-            <p><button class="btn btn-primary" type="submit">Yes</button> <a href="../">cancel</a></p>
+            <p><button class="btn btn-danger btn-sm px-4" type="submit">Yes</button> <a href="../">cancel</a></p>
         </form>
+        {% else %}
+            <p>Nothing</p>
+        {% endif %}
     </div>
 
 {% endblock content %}

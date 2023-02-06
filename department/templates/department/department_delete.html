@@ -5,13 +5,21 @@
 {% endblock head %}
 
 {% block content %}
-    <div class="container py-5">
-        <form method="POST">
-            {% csrf_token %}
-            <h3>Do you want to delete the department "{{object.name}}"?</h3>
-            <p><button class="btn btn-primary" type="submit">Yes</button> <a href="../">cancel</a></p>
-        </form>
-        <a href="/department/">All departments</a>
+    <div class="container text-center">
+        {% if object %}
+            <form method="POST">
+                {% csrf_token %}
+                <h3>Do you want to delete the department "{{object.name}}"?</h3>
+                {% if total_user_in_department %}
+                    <p class="text-danger mb-2">Department '{{object.name}}' has {{total_user_in_department}} users, so can't delete it.</p>
+                {% else %}
+                    <p><button class="btn btn-danger" type="submit">Yes</button> <a href="../">cancel</a></p>
+                {% endif %}
+
+            </form>
+        {% else %}
+            <p>Nothing</p>
+        {% endif %}
     </div>
 
 {% endblock content %}

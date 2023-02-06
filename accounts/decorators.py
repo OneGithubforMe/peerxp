@@ -34,7 +34,7 @@ def admin_user(function):
             return function(request, *args, **kwargs)
         else:
             from utils.Constants import LOGIN_URL
-            return HttpResponse("You are not a Admin")
+            return HttpResponse("Admin permission required.")
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap

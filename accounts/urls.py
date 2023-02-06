@@ -1,13 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import UserLogin, CreateUser, logout_user#, UsersListView
+from .views import user_login, create_user, logout_user
 
 app_name="accounts"
 
 urlpatterns = [
-    path('login', UserLogin.as_view(), name="user-login"),
+    path('login', user_login, name="user-login"),
     path("logout", logout_user, name="user-logout"),
-    # path('user/', UsersListView.as_view(), name="user-create"),
-    path('user/create', CreateUser.as_view(), name="user-create"),
-    # path('', include('django.contrib.auth.urls')),
+    path('user/create', create_user, name="user-create"),
 ]

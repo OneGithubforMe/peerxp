@@ -19,11 +19,12 @@ class UserRoleChoice(Enums):
     Admin = 1
     User = 2
 
+
 TICKET_PRIORITY = (
-    ("Low", "Low"),
-    ("Normal", "Normal"),
-    ("High", "High"),
-    ("Urgent", "Urgent"),
+    ("low", "low"),
+    ("normal", "normal"),
+    ("high", "high"),
+    ("urgent", "urgent"),
 )
 
 
@@ -35,9 +36,6 @@ class TicketPriority(Enums):
 
 ZENDESK_SUB_DOMAIN = "ghanhelp"
 ZENDESK_API_TOKEN = "bWFpbHRvZ2hhbnNoeWFtNDdAZ21haWwuY29tL3Rva2VuOmdDRmNjTTJLV2x5TEN1M1Y3U29zU0NTNTdhTTBLendMdG9Ed1hpUVc"
-ZENDESK_API_URLS = {
-    "create": f'https://{ZENDESK_SUB_DOMAIN}.zendesk.com/api/v2/tickets',
-    "delete": f'https://{ZENDESK_SUB_DOMAIN}.zendesk.com/api/v2/tickets/',
-}
+ZENDESK_API_URL = f'https://{ZENDESK_SUB_DOMAIN}.zendesk.com/api/v2/tickets/'
 
 
