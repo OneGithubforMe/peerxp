@@ -1,0 +1,25 @@
+{% extends 'base/base_html.html' %}
+{% load account_template_tags %}
+
+{% block head %}
+    <title>Index</title>
+{% endblock head %}
+
+{% block content %}
+<div class="m-3">
+    <a href="/ticket/create">Create Ticket</a><br>
+    <a href="/ticket/">Manage Ticket</a><br>
+    {% is_admin request.user.role as admin_access%}
+    {% if admin_access %}
+        <a href="/department/">Checkout Departments</a><br>
+        <a href="/account/user/create">Add user</a><br>
+    {% endif %}<br>
+    <a href="/account/logout">Logout</a><br>
+</div>
+{% endblock content %}
+
+{% block js %}
+    <script>
+
+    </script>
+{% endblock js %}

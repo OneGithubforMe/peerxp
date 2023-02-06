@@ -1,0 +1,51 @@
+{% load account_template_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% include 'base/bootstrap.html' %}
+
+    {% block pre_head %}
+    {% endblock pre_head %}
+
+    {% block head %} {% endblock head %}
+
+    {% block post_head %} {% endblock post_head %}
+</head>
+
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% csrf_token %}
+
+    {% block pre_content %}
+    {% endblock pre_content %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block post_content %}
+    {% endblock post_content %}
+
+    {% block js %}
+    {% endblock js %}
+
+    {% block footer %}
+    <div class="mx-4 mt-3">
+        {% is_admin request.user.role as admin_access%}
+        {% if admin_access %}
+            <a href="/department/">All departments</a><br>
+        {% endif %}
+        <a href="/ticket/">All Tickets</a>
+    </div>
+    {% endblock footer %}
+</body>
+</html> 
+

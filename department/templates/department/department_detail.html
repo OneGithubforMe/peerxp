@@ -1,0 +1,16 @@
+{% extends 'base/base_html.html' %}
+
+{% block head %}
+    <title>{{object.name}}</title>
+{% endblock head %}
+
+{% block content %}
+    <div class="container py-5">
+        <h3>{{object.name}}</h3>
+        <p>{{object.description}}</p>
+        <p><a class="btn btn-primary" href="/department/{{object.id}}/update">Update</a> <a class="btn btn-danger" href="/department/{{object.id}}/delete">Delete</a> </p>
+        <br>
+        <a href="/department/">All departments</a>
+    </div>
+{% endblock content %}
+

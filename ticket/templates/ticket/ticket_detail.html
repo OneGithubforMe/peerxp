@@ -1,0 +1,29 @@
+{% extends 'base/base_html.html' %}
+
+{% block head %}
+    <title>{{object.subject}}</title>
+{% endblock head %}
+
+{% block content %}
+    <div class="container py-5">
+        <h3>{{object.subject}}</h3>
+        <p>{{object.description}}</p>
+        <p>Zendesk id => {{object.zendesk_ticket_id}}</p>
+        <p>priority => {{object.priority}}</p>
+        <p>created by => </p>
+        <ul>
+            <li>Name: {{object.created_by.name }} </li>
+            {% if object.created_by.email %}
+                <li>Email: {{object.created_by.email }} </li>
+            {% endif %}
+            {% if object.created_by.phone_number %}
+                <li>Mobile No: {{object.created_by.country_code}} {{object.created_by.phone_number}} </li>
+            {% endif %}
+        </ul>
+        <p><a class="btn btn-danger" href="/ticket/{{object.id}}/delete">Delete</a> </p>
+        <br>
+    </div>
+
+<a href="/ticket/create">Create Ticket</a><br>
+{% endblock content %}
+
