@@ -36,6 +36,8 @@ class UserManager(BaseUserManager):
         user_obj.set_password(password)  # change user password
         user_obj.is_staff = staff
         user_obj.is_superuser = admin
+        if admin:
+            user_obj.role = UserRoleChoice.Admin.value
         user_obj.save(using=self._db)
         return user_obj
 
