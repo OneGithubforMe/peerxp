@@ -1,6 +1,7 @@
 from enum import Enum
+from django.conf import settings
 
-class Enums(Enum):
+class ModifiedEnum(Enum):
     @classmethod
     def values(cls):
         return [member.value for member in cls]
@@ -15,7 +16,8 @@ USER_ROLE_CHOICE = (
     (2, 'User'),
 )
 
-class UserRoleChoice(Enums):
+
+class UserRoleChoice(ModifiedEnum):
     Admin = 1
     User = 2
 
@@ -28,14 +30,14 @@ TICKET_PRIORITY = (
 )
 
 
-class TicketPriority(Enums):
+class TicketPriority(ModifiedEnum):
     Low = "Low"
     Normal = "Normal"
     High = "High"
     Urgent = "Urgent"
 
-ZENDESK_SUB_DOMAIN = "ghanhelp"
-ZENDESK_API_TOKEN = "bWFpbHRvZ2hhbnNoeWFtNDdAZ21haWwuY29tL3Rva2VuOmdDRmNjTTJLV2x5TEN1M1Y3U29zU0NTNTdhTTBLendMdG9Ed1hpUVc"
+ZENDESK_SUB_DOMAIN = settings.ENV_DICT.get("ZENDESK_SUB_DOMAIN")
+ZENDESK_API_TOKEN = settings.ENV_DICT.get("ZENDESK_API_TOKEN")
 ZENDESK_API_URL = f'https://{ZENDESK_SUB_DOMAIN}.zendesk.com/api/v2/tickets/'
 
 

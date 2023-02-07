@@ -20,10 +20,13 @@ class Zendesk:
                 "Authorization": f"Basic {ZENDESK_API_TOKEN}"
             }
             is_successful, response = ExternalApi(url=ZENDESK_API_URL, data=data, headers=headers).post()
-            if response.get('ticket'):
+            if is_successful and response.get('ticket'):
                 ticket_obj.zendesk_ticket_id = response['ticket'].get('id')
                 ticket_obj.save()
-            return True, None
+            if is_successful:
+                return True, response
+            else:
+                return False, response
         except Exception as e:
             return False, str(e)
 

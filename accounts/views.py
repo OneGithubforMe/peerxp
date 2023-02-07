@@ -41,6 +41,7 @@ def create_user(request):
     return render(request, 'accounts/user_create.html', context)
 
 
+@login_user
 def logout_user(request):
     logout(request)
     return redirect("accounts:user-login")

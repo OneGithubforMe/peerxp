@@ -32,9 +32,9 @@ class AllZendeskTicketsView(ListView):
     def get_queryset(self):
         from utils.Constants import UserRoleChoice
         if self.request.user.role == UserRoleChoice.Admin.value:
-            result = ZendeskTicket.objects.all()
+            result = ZendeskTicket.objects.filter(zendesk_ticket_id__isnull=False)
         else:
-            result = ZendeskTicket.objects.filter(created_by=self.request.user)
+            result = ZendeskTicket.objects.filter(created_by=self.request.user, zendesk_ticket_id__isnull=False)
         return result
 
 
@@ -45,9 +45,10 @@ class DeleteZendeskTicketView(DeleteView):
 
     def get_object(self):
         ticket_id_ = self.kwargs.get('ticket_id')
-        result = ZendeskTicket.objects.filter(id=ticket_id_).first()
+        result = ZendeskTicket.objects.filter(id=ticket_id_, zendesk_ticket_id__isnull=False).first()
         if not result:
-            raise Http404("Not exist")
+            from utils.Strings import NOT_EXIST
+            raise Http404(NOT_EXIST)
         return result
 
     def get_success_url(self):
@@ -66,9 +67,10 @@ class TicketDetailView(DetailView):
         ticket_id_ = self.kwargs.get('ticket_id')
         from utils.Constants import UserRoleChoice
 
-        result = ZendeskTicket.objects.filter(id=ticket_id_).first()
+        result = ZendeskTicket.objects.filter(id=ticket_id_, zendesk_ticket_id__isnull=False).first()
         if (not result) or (not (self.request.user.role == UserRoleChoice.Admin.value or self.request.user == result.created_by)):
-            raise Http404("Not exist")
+            from utils.Strings import NOT_EXIST
+            raise Http404(NOT_EXIST)
         return result
 
     def get_context_data(self, object):

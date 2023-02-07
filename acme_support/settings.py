@@ -12,21 +12,26 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env(environ.Env.read_env(env_file=str(BASE_DIR) + '/.env'))
 
+ENV_DICT = os.environ
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-4*zdi@ff@=eyivc0w9ut#n)rvqtm#_8i(b-)@k6tg*rk9*$$#g"
+SECRET_KEY = ENV_DICT.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -82,12 +87,15 @@ WSGI_APPLICATION = "acme_support.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "peerxp_db",
-        'USER': "scoot_tech",
-        'PASSWORD': "HpRWQ3uy66vT",
-        "HOST": 'localhost',
+        'NAME': ENV_DICT.get("DB_NAME"),
+        'USER': ENV_DICT.get("DB_USER"),
+        'PASSWORD': ENV_DICT.get("DB_PASSWORD"),
+        "HOST": ENV_DICT.get("DB_HOST"),
     }
 }
+if ENV_DICT.get('DB_PORT'):
+    DATABASES['default']['PORT'] = ENV_DICT.get('DB_PORT')
+
 
 
 # Password validation
