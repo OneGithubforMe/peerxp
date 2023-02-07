@@ -3,6 +3,8 @@
 ### Project Detail - 
 https://docs.peerxp.com/recruitment/engineering/py-django-technical-assessment
 
+### How Project work -
+https://drive.google.com/file/d/1xvUW6RBiEYAZ4_wDD54TU0f-sCZqKrEF/view
 
 ### how to run the project - 
 1. Please add `.env` (in the same place where manage.py exist) file with following values - `SECRET_KEY, DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, ZENDESK_SUB_DOMAIN, ZENDESK_API_TOKEN` 
